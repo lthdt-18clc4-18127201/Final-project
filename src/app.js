@@ -1,12 +1,20 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-//const passport = require("passport")
+const bcrypt = require('bcrypt');
 const handlebars = require('express-handlebars');
+const { userInfo } = require('os');
 const app = express();
-const port = 5000;
+const passport = require('passport');
+const route = require('./routes/app');
+const port = 5000; 
+const users =[]
+// const initializePassport = require('../passport-config');
+// initializePassport(passport);
 
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 app.engine('hbs', handlebars({
     extname: '.hbs'
@@ -16,34 +24,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
 
-app.get('/', (req, res) => {
-    res.render('homepage');
-});
-
-app.get('/news', (req, res) => {
-    res.render('news');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-// app.get('/login', (req, res) => res.render('login'))
-//     .post(passport.authenticate('local', { 
-//     failureRedirect: '/login', 
-//     successRedirect: '/secret',
-//     failureFlash: true,
-// }));
-
-// app.get('/secret', (req, res) => {
-//     console.log(req.isAuthenticated())
-//     if (req.isAuthenticated()) { 
- 
-//         res.redirect('/');
-//     } else {    
-//         res.redirect('/login');
-//     }
-// });
+route(app);
 
 
-app.listen(port, (req, res) => console.log(`System running at http://localhost:${port}`));
+app.listen(port, (req, res) => console.log(`System running at http://localhost:${port}`));  

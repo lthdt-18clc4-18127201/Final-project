@@ -1,7 +1,11 @@
-<form method="POST" action="/login">
+<form method="POST" action="/register">
   <div class="mt-4">
     <label for="username">Username</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Username..."reqiured>
+    <input type="text" class="form-control" id="name" name="username" placeholder="Username..."reqiured>
+  </div>
+    <div class="form-group">
+    <label for="Email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Email..."required>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
@@ -13,5 +17,5 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<label for="form-suggest">Haven't an account?</label>
-<a href="/register" class="btn btn-primary my-4">Go to Register</a>
+<label for="form-suggest">Already have account?</label>
+<a href="/login" class="btn btn-primary my-4">Go to Login</a>
