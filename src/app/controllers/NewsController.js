@@ -28,5 +28,11 @@ class NewsController {
         new_add.save();
         res.redirect('/news');
     };
+
+    edit(req, res, next) {
+        Post.findById(req.params.id)
+            .then(post => res.render('news/edit', { post: mongooseToObject(post) })); 
+        
+    };
 }
 module.exports = new NewsController;

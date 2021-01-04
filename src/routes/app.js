@@ -3,12 +3,14 @@ const siteRouter = require('./site');
 const loginRouter = require('./login');
 const registerRouter = require('./register');
 const changeProfileRouter = require('./changeprofile'); 
+const userRouter = require('./user');
 
 function route(app) {    
     app.use('/news', newsRouter);
     app.use('/login', loginRouter);
     app.use('/register', registerRouter);
     app.use('/changeprofile', changeProfileRouter);
+    app.use('/user', userRouter);
     app.use('/', siteRouter);
     
     app.post('/register', async (req, res) => {

@@ -20,7 +20,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 app.engine('hbs', handlebars({
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: {
+        sum: (a, b) => a + b,
+    },
 }));
 
 app.set('view engine', 'hbs');
