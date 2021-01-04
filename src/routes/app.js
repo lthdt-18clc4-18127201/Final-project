@@ -1,33 +1,15 @@
-const newsRouter = require('./routes');
-const homepageRouter = require('./routes');
-const loginRouter = require('./routes');
-const regitserRouter = require('./routes')
+const newsRouter = require('./news');
+const siteRouter = require('./site');
+const loginRouter = require('./login');
+const registerRouter = require('./register');
+const changeProfileRouter = require('./changeprofile'); 
 
-function route(app) {
-
-    // app.use('/', homepageRouter);
-    // app.use('/news', newsRouter);
-    // app.use('/login', loginRouter);
-    // app.use('register', regitserRouter);
-    app.get('/', (req, res) => {
-        res.render('homepage')
-    });
-
-    app.get('/news', (req, res) => {
-        res.render('news')
-    });
-
-    app.get('/login', (req, res) => {
-        res.render('login')
-    });
-
-    app.get('/register', (req, res) => {
-        res.render('register')
-    });
-
-    app.post('/login', (req, res) => {
-    
-    });
+function route(app) {    
+    app.use('/news', newsRouter);
+    app.use('/login', loginRouter);
+    app.use('/register', registerRouter);
+    app.use('/changeprofile', changeProfileRouter);
+    app.use('/', siteRouter);
     
     app.post('/register', async (req, res) => {
         try{

@@ -1,4 +1,5 @@
 class RegisterController {
+
     register(req, res) {
         res.render('register')
     }

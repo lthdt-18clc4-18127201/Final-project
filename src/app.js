@@ -8,7 +8,10 @@ const app = express();
 const passport = require('passport');
 const route = require('./routes/app');
 const port = 5000; 
+const db = require('./config/db/connect');
 const users =[]
+
+db.connect();
 // const initializePassport = require('../passport-config');
 // initializePassport(passport);
 
@@ -21,7 +24,7 @@ app.engine('hbs', handlebars({
 }));
 
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 
 route(app);

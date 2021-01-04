@@ -1,12 +1,32 @@
 const { render } = require("node-sass");
+const Post = require('../Models/Post');
+const { mutipleMongooseToObject } = require('../../util/mongoose');
+const { mongooseToObject } = require('../../util/mongoose');
 
 class NewsController {
-    index(req, res) {
-        res.render('news')
-    }
+    news(req, res, next) {
+        Post.find({})
+            .then(posts => {
+                res.render('news', { posts: mutipleMongooseToObject(posts) });
+            })
+            .catch(next);
+    };
     show(req, res) {
-        res.send('NEW DETAIL!')
-    }
+        Post.findOne({slug: req.params.slug})
+            .then(post => {
+                res.render('news/show', { post: mongooseToObject(post) });
+            })
+    };
+    add(req, res, next) {
+        res.render('news/add')
+    };
+
+    store(req, res, next) {
+        const formData = req.body;
+        formData.image = req.body.img;
+        const new_add = new Post(req.body);
+        new_add.save();
+        res.redirect('/news');
+    };
 }
 module.exports = new NewsController;
-
